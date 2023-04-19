@@ -1,0 +1,39 @@
+.hero {
+    @apply relative h-full w-full bg-[url('/images/bg-hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover;
+
+    .filter {
+        @apply bg-black w-full h-full lg:bg-opacity-50;
+    
+        nav {
+            @apply px-12 py-5;
+        }
+
+        .authForm {
+            @apply flex justify-center;
+
+            .wrapper {
+                @apply bg-black/70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full;
+            
+                h2 {
+                    @apply text-white text-4xl mb-8 font-semibold;
+                }
+
+                .loginForm {
+                    @apply flex flex-col gap-4;
+
+                    .submitButton {
+                        @apply bg-red-600 py-3 text-white font-semibold rounded-md w-full mt-10 hover:bg-red-700 transition;
+                    }
+                }
+
+                .createAccount {
+                    @apply text-neutral-500 mt-12;
+
+                    .link {
+                        @apply text-white ml-1 hover:underline cursor-pointer;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+.inputWrapper {
+    @apply relative;
+
+    .authInput {
+        @apply block rounded-md px-6 pt-6 pb-1 w-full text-white bg-neutral-700 appearance-none focus:outline-none;
+    }
+
+    .authLabel {
+        @apply absolute text-zinc-400 duration-150 -translate-y-3 scale-75 top-4 z-10 origin-[0] left-6;
+    }
+}
