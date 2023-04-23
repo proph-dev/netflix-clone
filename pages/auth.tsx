@@ -1,9 +1,14 @@
+import axios from 'axios';
 import { useCallback, useState } from 'react';
 import Image from 'next/image';
 import Input from '@/components/form/Input'
 import auth from '../styles/pages/auth.module.scss';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const Auth = () => {
+    const router = useRouter();
+
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -13,6 +18,37 @@ const Auth = () => {
     const toggleVariant = useCallback(() => {
         setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login');
     }, []);
+
+    // Login
+    const login = useCallback(async () => {
+        try {
+            await signIn('credentials', {
+                email,
+                password,
+                redirect: false,
+                callbackUrl: '/'
+            });
+
+            router.push('/');
+        } catch (error) {
+            console.log(error);
+        }
+    }, [email, password, router]);
+
+    // Register
+    const register = useCallback(async () => {
+        try {
+            await axios.post('/api/register', {
+                email,
+                name,
+                password
+            });
+
+            login();
+        } catch (error) {
+            console.log(error);
+        }
+    }, [email, name, password, login]);
 
     return (
         <div className={ auth.hero }>
@@ -30,7 +66,7 @@ const Auth = () => {
                     <div className={ auth.wrapper }>
                         <h2>{ variant === "login" ? "S'identifier" : "S'inscrire" }</h2>
 
-                        <form className={ auth.loginForm }>
+                        <div className={ auth.loginForm }>
                             {variant != "login" && (
                                 <Input
                                     label='Pseudo'
@@ -54,10 +90,10 @@ const Auth = () => {
                                 value={password}
                             />
 
-                            <button className={ auth.submitButton }>
+                            <button onClick={ variant === 'login' ? login : register } className={ auth.submitButton }>
                                 {variant === "login" ? "S'identifier" : "S'inscrire"}
                             </button>
-                        </form>
+                        </div>
                         
                         <p className={ auth.createAccount }>
                             {variant === "login" ? "Première visite sur Netflix ?" : "Vous avez déjà un compte ?"}
