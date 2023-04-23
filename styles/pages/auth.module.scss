@@ -24,6 +24,14 @@
                     .submitButton {
                         @apply bg-red-600 py-3 text-white font-semibold rounded-md w-full mt-10 hover:bg-red-700 transition;
                     }
+
+                    .othersConnexion {
+                        @apply flex items-center justify-center gap-4 mt-8;
+                        
+                        .google {
+                            @apply w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition;
+                        }
+                    }
                 }
 
                 .createAccount {
@@ -34,6 +42,8 @@
                     }
                 }
             }
+
+
         }
     }
 }

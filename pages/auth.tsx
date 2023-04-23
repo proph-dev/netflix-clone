@@ -6,6 +6,9 @@ import auth from '../styles/pages/auth.module.scss';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
+
 const Auth = () => {
     const router = useRouter();
 
@@ -93,6 +96,15 @@ const Auth = () => {
                             <button onClick={ variant === 'login' ? login : register } className={ auth.submitButton }>
                                 {variant === "login" ? "S'identifier" : "S'inscrire"}
                             </button>
+
+                            <div className={ auth.othersConnexion }>
+                                <div onClick={() => signIn('google', { callbackUrl: '/' })} className={ auth.google }>
+                                    <FcGoogle size={30} />
+                                </div>
+                                <div onClick={() => signIn('github', { callbackUrl: '/' })} className={ auth.google }>
+                                    <FaGithub size={30} />
+                                </div>
+                            </div>
                         </div>
                         
                         <p className={ auth.createAccount }>
